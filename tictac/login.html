@@ -6,21 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login Tictac</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        $container-max-widths: (
+                sm: 240px,
+                );
+    </style>   
 </head>
-
-<body>
-    <h1 class="test-align-center">Login to play Tictac</h1>
-    <form action="/" method="post">
-        <div class="col container-sm py-3">
-            <div class="col py-2">
-                <input type="text" class="form-control" name="Email" placeholder="Email" aria-label="First name">
+<body class="bg-primary">
+    <div class="row align-items-center text-light" style="min-height: 90vh">
+    <div class="container-sm col-lg-3 py-2 text-center align-items-center vertical-align-center bg-success align-middle">
+        <h1 class="test-center">Login to play Tictac</h1>
+        <form action="/login" method="post">
+            <div class="col container-sm py-3">
+                <div class="col py-2">
+                    <input type="text" class="form-control" name="Email" placeholder="Email" aria-label="First name">
+                </div>
+                <div class="col py-2">
+                    <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password">
+                </div>
+                <a href="../signup" class="text-black">Signup Instead</a>
+                <br>
+                <button type="submit" class="btn btn-active btn-primary py-2">Submit</button>
             </div>
-            <div class="col py-2">
-                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password">
-            </div>
-            <button type="submit" class="btn btn-active btn-primary py-2">Submit</button>
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 

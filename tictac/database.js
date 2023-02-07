@@ -2,10 +2,10 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
 
-    host: 'localhost',
-    database: 'tictac_temp',
-    user: 'root',
-    password: 'root'
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"login_test"
 });
 connection.connect(function(error) {
     if (error) {

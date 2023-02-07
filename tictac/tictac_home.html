@@ -154,7 +154,7 @@ const checkwinner = () => {
             if ((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && (boxtext[e[0]].innerText !== "")) {
                 console.log(document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won")
                 gameover = true;
-                alert('gameover')
+                // alert('gameover')
                 document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won";
             }
         })

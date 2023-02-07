@@ -17,8 +17,14 @@ app.get('/login', (req, res) => {
 app.get('/tictac', (req, res) => {
     res.sendFile(__dirname + "/tictac_home.html")
 })
+// app.get('/tictac', (req, res) => {
+//     if(req. isAuthenticated()){
+//         res.sendFile(__dirname + "/tictac_home.html")}
+//     else{
+//         res.sendFile(__dirname + "/login.html")}
+// })
 
-app.post('signup/', (req, res) => {
+app.post('/signup', (req, res) => {
     console.log(req.body)
     var user_email = req.body.Email;
     var user_fname = req.body.fname;
@@ -27,9 +33,13 @@ app.post('signup/', (req, res) => {
     var user_pass2 = req.body.cpassword;
 
     console.log(user_email)
+    if(user_pass !== user_pass2){
+        console.log('both pass are not same');
+        res.send('Passwords are not same');
+    }
 
-    var query = "INSERT INTO logintictac (id,fname, lname, email, password) VALUES(?,?,?,?,?);"
-    database.query(query, [2,user_fname, user_lname, user_email, user_pass], function(error, data,field) {
+    var query = "INSERT INTO logintictac (fname, lname, email, pass) VALUES(?,?,?,?);"
+    database.query(query, [user_fname, user_lname, user_email, user_pass], function(error, data,field) {
         if (error) {
             console.error(error);
             res.send("An error occurred");
@@ -41,12 +51,12 @@ app.post('signup/', (req, res) => {
     res.send('Successfully Signed Up')
 });
 
-app.post('/',(req,res)=>{
+app.post('/login',(req,res)=>{
     console.log(req.body)
     var user_email = req.body.Email;
     var user_pass = req.body.password;
 
-    var query = "select email,password from logintictac where email=?;"
+    var query = "select email,pass from logintictac where email=?;"
         database.query(query, [user_email], function(error, data,field) {
             if (error) {
                 console.error(error);
@@ -54,7 +64,7 @@ app.post('/',(req,res)=>{
             } 
             else {
                 console.log(data);
-                if (data[1].password==user_pass)
+                if (data[0].pass==user_pass)
                 {
                     // res.redirect('/tictac');
                     res.sendFile(__dirname + "/tictac_home.html")
