@@ -25,14 +25,16 @@
     const loginController = async(req,res) =>{
         console.log('loginController called');
 
-        const email = req.body.email;
-        const password = req.body.password;
+        console.log(req);
+        // console.log(item.email)
+        var email = req.body.email;
+        var password = req.password;
 
-        if (!req.body.email || !password){
+        if (!email || !password){
             res.status(403).send('Email and Passwords are required');
             return;
         }
-        const user = users.find(item=>item.email === email);
+        const user = users.find((item)=>item.email === email);
         if(!user){
             res.status(403).send('User not found');
             return;
