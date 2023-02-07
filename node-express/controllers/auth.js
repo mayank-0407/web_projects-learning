@@ -1,4 +1,9 @@
     const users = require("../models/user"); 
+    const bodyparser = require("body-parser");
+    const express = require('express')
+    const app = express()   
+    router.use(bodyparser.json({ extended: true }));
+
     const signupController = async(req,res) =>{
         console.log('signupController called');
 

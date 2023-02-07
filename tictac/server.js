@@ -1,18 +1,24 @@
 const express = require('express')
 const bodyparser = require("body-parser");
 var database = require('./database');
-var router = express.Router();
 
+var router = express.Router();
 const app = express()
 const port = 3000
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/signup', (req, res) => {
     res.sendFile(__dirname + "/signup.html")
 })
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + "/login.html")
+})
+app.get('/tictac', (req, res) => {
+    res.sendFile(__dirname + "/tictac_home.html")
+})
 
-app.post('/', (req, res) => {
+app.post('signup/', (req, res) => {
     console.log(req.body)
     var user_email = req.body.Email;
     var user_fname = req.body.fname;
@@ -32,8 +38,35 @@ app.post('/', (req, res) => {
             // res.send("SUCCESS");
         }
     });
-    res.send('Successfully signed in')
+    res.send('Successfully Signed Up')
 });
+
+app.post('/',(req,res)=>{
+    console.log(req.body)
+    var user_email = req.body.Email;
+    var user_pass = req.body.password;
+
+    var query = "select email,password from logintictac where email=?;"
+        database.query(query, [user_email], function(error, data,field) {
+            if (error) {
+                console.error(error);
+                res.send("An error occurred");
+            } 
+            else {
+                console.log(data);
+                if (data[1].password==user_pass)
+                {
+                    // res.redirect('/tictac');
+                    res.sendFile(__dirname + "/tictac_home.html")
+                    // res.send("SUCCESS");
+                    // res.send('Successfully Logged In')
+                }
+                else{
+                    res.send("incorrect pass");
+                }
+            }
+        });
+})
 app.listen(port, () => {
     console.log(`app listening on port ${port}`)
 })

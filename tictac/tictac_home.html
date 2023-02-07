@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./static/style.css"> -->
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    background-color: rgb(31, 31, 78);
+    color: white;
+    font-weight: bold;   
+    height: 75px;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 500px;
+}
+body{
+    background-color: rgb(98, 98, 211);
+    color: white;
+}
+nav ul{
+    list-style-type: none;
+}
+.gamecontainer{
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(3,10vw);
+    grid-template-rows: repeat(3,10vw);
+}
+.box{
+    border: 2px solid black;
+    font-size: 8vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box:hover{
+    border: 2px solid rgb(175, 32, 32);
+    background-color: rgb(59, 108, 182);
+    cursor: pointer;
+}
+.gameinfo{
+    padding: 0 64px;
+}
+.bt-0{
+    border-top: 0;
+}
+.bb-0{
+    border-bottom: 0;
+}
+.br-0{
+    border-right: 0;
+}
+.bl-0{
+    border-left: 0;
+}
+.gameinfo{
+    padding: 0 64px;
+    justify-content: center;
+}
+.gameinfo h2{
+    font-size: 4vw;
+    font-weight: bold;
+}
+.info{
+    padding: 0 64px;
+    margin-top: 32px;
+    font-size: medium;
+    position: absolute;
+    left: 50%;
+    
+}
+#reset{
+    margin: 0 23px;
+    padding: 6px 14px;
+    background: rgb(197, 151, 90);
+    border-radius: 6px;
+    cursor: pointer;
+    /* align-self: right; */
+    display: flex;
+    margin-left: 24px;
+    position: absolute;
+    left: 59%;
+    top: 50%;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>Welcome To PLAY ZONE</li>
+        </ul>
+    </nav>
+    <div class="gamecontainer">
+        <div class="container">
+            <div class="box bl-0 bt-0"><span class="boxtext"></span></div>
+            <div class="box bt-0"><span class="boxtext"></span></div>
+            <div class="box bt-0 br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0"><span class="boxtext"></span></div>
+            <div class="box"><span class="boxtext"></span></div>
+            <div class="box br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0 bb-0"><span class="boxtext"></span></div>
+            <div class="box bb-0"><span class="boxtext"></span></div>
+            <div class="box br-0 bb-0"><span class="boxtext"></span></div>
+        </div>
+        <div class="gameinfo">
+            <h2>Lets Play Tic Tac Toe</h2>
+            <div>
+                <h2 class="info">Turn for X</h2>
+                <br>
+                <br>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        console.log("tic tac toe")
+let turn = "X"
+let gameover = false
+
+//change turn on ervy click
+const changeturn = () => {
+    return turn === "X" ? "0" : "X"
+}
+
+//if anyone is winner
+const checkwinner = () => {
+        let boxtext = document.getElementsByClassName('boxtext');
+        let winn = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [1, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+        winn.forEach(e => {
+            if ((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && (boxtext[e[0]].innerText !== "")) {
+                console.log(document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won")
+                gameover = true;
+                alert('gameover')
+                document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won";
+            }
+        })
+
+    }
+    // main code
+let boxes = document.getElementsByClassName("box");
+Array.from(boxes).forEach(element => {
+    let boxtext = element.querySelector('.boxtext');
+    element.addEventListener('click', () => {
+        if (boxtext.innerText === '' && gameover === false) {
+            boxtext.innerText = turn;
+            turn = changeturn();
+            checkwinner();
+            if (!gameover)
+                document.getElementsByClassName("info")[0].innerText = "Turn For " + turn;
+        }
+    })
+})
+
+//reset button
+reset.addEventListener('click', () => {
+    let boxtexts = document.querySelectorAll('.boxtext');
+    Array.from(boxtexts).forEach(element => {
+        element.innerText = ""
+    });
+    turn = "X";
+    gameover = false;
+    document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+})
+    </script>
+    <script src="./static/script.js"></script>
+</body>
+</html>
